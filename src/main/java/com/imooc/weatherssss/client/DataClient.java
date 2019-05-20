@@ -13,10 +13,18 @@ import java.util.List;
  * @ClassName: CityClient
  * @date 2019/5/20 13:00
  */
-@FeignClient("WEATHER-CITYLIST")
+@FeignClient("WEATHER-ZUUL")
+public interface DataClient {
+
+    @GetMapping("/weatherCityList/cityList")
+    List<City> getCityData();
+
+}
+
+/*@FeignClient("WEATHER-CITYLIST")
 public interface CityClient {
 
     @GetMapping("/cityList")
     List<City> getCityData();
 
-}
+}*/

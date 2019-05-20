@@ -1,13 +1,12 @@
 package com.imooc.weatherssss.job;
 
-import com.imooc.weatherssss.client.CityClient;
+import com.imooc.weatherssss.client.DataClient;
 import com.imooc.weatherssss.service.WeatherCollectionService;
 import com.imooc.weatherssss.vo.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ public class CityDataJob {
     private WeatherCollectionService weatherCollectionService;
 
     @Autowired
-    private CityClient cityClient;
+    private DataClient dataClient;
 
     //schedule注解形式的四种方式
     //两次任务之间的固定时间
@@ -41,7 +40,7 @@ public class CityDataJob {
         long start = System.nanoTime();
 
         //TODO 调用citylist微服务
-        List<City> cityData = cityClient.getCityData();
+        List<City> cityData = dataClient.getCityData();
 
         for (City city :cityData) {
             weatherCollectionService.syncWeatherData(city.getCityId());
